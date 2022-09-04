@@ -29,7 +29,7 @@ git config --global core.compression -1
 
 echo "install gnutls-bin"
 
-apt install gnutls-bin
+apt install -y gnutls-bin
 
 # Make the script quit if there are errors
 set -e
