@@ -19,6 +19,12 @@ fi
 # should always be the case in containers.
 cd /
 
+git config --global http.postBuffer 524288000
+
+git config --global https.postBuffer 524288000
+
+git config --global core.compression -1
+
 # Make the script quit if there are errors
 set -e
 

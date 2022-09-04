@@ -165,9 +165,7 @@ command in this repository:
 
 .. code-block:: bash
 
-    git clone https://github.com/runfalk/synology-wireguard.git
-    cd synology-wireguard/
-    sudo docker build -t synobuild .
+    sudo docker --network=host build -t synobuild .
 
 Now we can build for any platform and DSM version using:
 
