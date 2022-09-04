@@ -165,7 +165,7 @@ command in this repository:
 
 .. code-block:: bash
 
-    sudo docker --network=host build -t synobuild .
+    sudo docker build --network=host -t synobuild .
 
 Now we can build for any platform and DSM version using:
 
