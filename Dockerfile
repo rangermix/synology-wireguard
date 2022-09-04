@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 VOLUME [ "/toolkit_tarballs" ]
 
-ENV IS_IN_CONTAINER 
+ENV IS_IN_CONTAINER 1
 
 RUN rm /etc/apt/source.list
 
