@@ -19,17 +19,12 @@ fi
 # should always be the case in containers.
 cd /
 
-echo "add git config"
-
-git config --global http.postBuffer 524288000
-
-git config --global https.postBuffer 524288000
-
-git config --global core.compression -1
-
 echo "install gnutls-bin"
 
-apt install -y gnutls-bin
+apt-get install -y gnutls-bin
+git config --global http.sslVerify false
+git config --global http.postBuffer 1048576000
+git config --global https.postBuffer 1048576000
 
 # Make the script quit if there are errors
 set -e
