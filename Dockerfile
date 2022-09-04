@@ -4,11 +4,11 @@ VOLUME [ "/toolkit_tarballs" ]
 
 ENV IS_IN_CONTAINER 1
 
-# RUN rm /etc/apt/sources.list
+RUN rm /etc/apt/sources.list
 
-# ADD sources.list /etc/apt/
+ADD sources.list /etc/apt/
 
-RUN sed -i -e 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//mirror:\/\/mirrors\.ubuntu\.com\/mirrors\.txt/' /etc/apt/sources.list
+# RUN sed -i -e 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//mirror:\/\/mirrors\.ubuntu\.com\/mirrors\.txt/' /etc/apt/sources.list
 
 RUN apt-get update \
  && apt-get -qy install git python3 wget ca-certificates xz-utils
