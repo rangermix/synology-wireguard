@@ -4,6 +4,8 @@ VOLUME [ "/toolkit_tarballs" ]
 
 ENV IS_IN_CONTAINER 1
 
+RUN echo "nameserver 223.5.5.5" | sudo tee /etc/resolv.conf > /dev/null
+
 RUN rm /etc/apt/sources.list
 
 ADD sources.list /etc/apt/
