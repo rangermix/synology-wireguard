@@ -4,11 +4,9 @@ VOLUME [ "/toolkit_tarballs" ]
 
 ENV IS_IN_CONTAINER 1
 
-RUN ls /etc
+RUN rm /etc/apt/sources.list
 
-RUN ls /etc/apt/
-
-ADD source.list /etc/apt/
+ADD sources.list /etc/apt/
 
 RUN apt-get update \
  && apt-get -qy install git python3 wget ca-certificates xz-utils
