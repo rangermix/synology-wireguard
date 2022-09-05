@@ -67,6 +67,8 @@ else
     cd /
 fi
 
+echo got pkgscripts-ng repo
+
 # Configure the package according to the DSM version
 if [[ "$DSM_VER" =~ ^7\.[0-9]+$ ]]; then
     os_min_ver="7.0-40000"
@@ -97,6 +99,8 @@ cp -p "$package_dir/template/SynoBuildConf/depends" "$package_dir/SynoBuildConf/
 # Install the toolchain for the given package arch and DSM version
 build_env="/build_env/ds.$PACKAGE_ARCH-$DSM_VER"
 
+echo Install the toolchain
+
 if [ ! -d "$build_env" ]; then
     if [ -f "/toolkit_tarballs/base_env-$DSM_VER.txz" ] && [ -f "/toolkit_tarballs/ds.$PACKAGE_ARCH-$DSM_VER.env.txz" ] && [ -f "/toolkit_tarballs/ds.$PACKAGE_ARCH-$DSM_VER.dev.txz" ]; then
         pkgscripts-ng/EnvDeploy -p $PACKAGE_ARCH -v $DSM_VER -t /toolkit_tarballs
@@ -113,6 +117,8 @@ if [ ! -d "$build_env" ]; then
     sed -i "s/xMDkzMDE0MDExNVow/0MDkzMDE4MTQwM1ow/g" DSTRootCAX3_Extended.crt
     cat DSTRootCAX3_Extended.crt >> "$build_env/etc/ssl/certs/ca-certificates.crt"
 fi
+
+echo Patch WireGuard
 
 # Patch WireGuard to use its own included memneq implementation if architecture
 # does not have built in memneq support.
