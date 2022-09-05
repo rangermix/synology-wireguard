@@ -19,22 +19,6 @@ fi
 # should always be the case in containers.
 cd /
 
-echo "install gnutls-bin"
-
-# apt-get install -y gnutls-bin
-# apt remove git -y
-# apt update && apt upgrade
-
-# DEBIAN_FRONTEND=noninteractive
-
-# apt install build-essential autoconf dh-autoreconf libcurl4-openssl-dev \
-#                  tcl-dev gettext asciidoc docbook2x install-info \
-#                  libexpat1-dev libz-dev -y
-
-# wget https://raw.githubusercontent.com/paul-nelson-baker/git-openssl-shellscript/master/compile-git-with-openssl.sh .
-
-# ./compile-git-with-openssl.sh -skiptests
-
 git config --global http.sslVerify false
 git config --global http.postBuffer 1048576000
 git config --global https.postBuffer 1048576000
@@ -123,18 +107,18 @@ echo Patch WireGuard
 # Patch WireGuard to use its own included memneq implementation if architecture
 # does not have built in memneq support.
 if [ -z ${APPLY_MEMNEQ_PATCH+x} ]; then
-  source "/pkgscripts-ng/include/platform.$PACKAGE_ARCH"
-  if [ ! -z ${ToolChainSysRoot64} ]; then
-    ToolChainSysRoot="$ToolChainSysRoot64"
-  elif [ ! -z ${ToolChainSysRoot32} ]; then
-    ToolChainSysRoot="$ToolChainSysRoot32"
-  fi
-  if ! grep -q "int crypto_memneq" "$build_env/$ToolChainSysRoot/usr/lib/modules/DSM-$DSM_VER/build/include/crypto/algapi.h"; then
-    export APPLY_MEMNEQ_PATCH=1
-  elif grep -q "#if defined(CONFIG_SYNO_BACKPORT_ARM_CRYPTO)" "$build_env/$ToolChainSysRoot/usr/lib/modules/DSM-$DSM_VER/build/include/crypto/algapi.h" && \
-  ! grep -qx "CONFIG_SYNO_BACKPORT_ARM_CRYPTO=y" "$build_env/$ToolChainSysRoot/usr/lib/modules/DSM-$DSM_VER/build/.config"; then
-    export APPLY_MEMNEQ_PATCH=1
-  fi
+    source "/pkgscripts-ng/include/platform.$PACKAGE_ARCH"
+    if [ ! -z ${ToolChainSysRoot64} ]; then
+        ToolChainSysRoot="$ToolChainSysRoot64"
+    elif [ ! -z ${ToolChainSysRoot32} ]; then
+        ToolChainSysRoot="$ToolChainSysRoot32"
+    fi
+    if ! grep -q "int crypto_memneq" "$build_env/$ToolChainSysRoot/usr/lib/modules/DSM-$DSM_VER/build/include/crypto/algapi.h"; then
+        export APPLY_MEMNEQ_PATCH=1
+    elif grep -q "#if defined(CONFIG_SYNO_BACKPORT_ARM_CRYPTO)" "$build_env/$ToolChainSysRoot/usr/lib/modules/DSM-$DSM_VER/build/include/crypto/algapi.h" && \
+    ! grep -qx "CONFIG_SYNO_BACKPORT_ARM_CRYPTO=y" "$build_env/$ToolChainSysRoot/usr/lib/modules/DSM-$DSM_VER/build/.config"; then
+        export APPLY_MEMNEQ_PATCH=1
+    fi
 fi
 
 # Disable quit if errors to allow printing of logfiles
