@@ -22,18 +22,18 @@ cd /
 echo "install gnutls-bin"
 
 # apt-get install -y gnutls-bin
-apt remove git -y
-apt update && apt upgrade
+# apt remove git -y
+# apt update && apt upgrade
 
-DEBIAN_FRONTEND=noninteractive
+# DEBIAN_FRONTEND=noninteractive
 
-apt install build-essential autoconf dh-autoreconf libcurl4-openssl-dev \
-                 tcl-dev gettext asciidoc docbook2x install-info \
-                 libexpat1-dev libz-dev -y
+# apt install build-essential autoconf dh-autoreconf libcurl4-openssl-dev \
+#                  tcl-dev gettext asciidoc docbook2x install-info \
+#                  libexpat1-dev libz-dev -y
 
-wget https://raw.githubusercontent.com/paul-nelson-baker/git-openssl-shellscript/master/compile-git-with-openssl.sh .
+# wget https://raw.githubusercontent.com/paul-nelson-baker/git-openssl-shellscript/master/compile-git-with-openssl.sh .
 
-./compile-git-with-openssl.sh -skiptests
+# ./compile-git-with-openssl.sh -skiptests
 
 git config --global http.sslVerify false
 git config --global http.postBuffer 1048576000
