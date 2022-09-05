@@ -21,7 +21,20 @@ cd /
 
 echo "install gnutls-bin"
 
-apt-get install -y gnutls-bin
+# apt-get install -y gnutls-bin
+apt-get install build-essential fakeroot dpkg-dev -y
+apt-get build-dep git -y
+apt-get install libcurl4-openssl-dev -y
+cd ~
+mkdir source-git
+cd source-git/
+apt-get source git
+cd git-2.*.*/
+sed -i -- 's/libcurl4-gnutls-dev/libcurl4-openssl-dev/' ./debian/control
+sed -i -- '/TEST\s*=\s*test/d' ./debian/rules
+dpkg-buildpackage -rfakeroot -b -uc -us
+dpkg -i ../git_*ubuntu*.deb
+
 git config --global http.sslVerify false
 git config --global http.postBuffer 1048576000
 git config --global https.postBuffer 1048576000

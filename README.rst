@@ -184,7 +184,7 @@ For the DS218j that I have, the complete command looks like this:
 .. code-block:: bash
 
     sudo docker run --rm --privileged --env PACKAGE_ARCH=armada38x --env DSM_VER=6.2 -v $(pwd)/artifacts:/result_spk synobuild
-    docker run --rm --network=host --privileged --env PACKAGE_ARCH=apollolake --env DSM_VER=6.2 -v $(pwd)/artifacts:/result_spk synobuild
+    docker run --rm --network=host --privileged --env PACKAGE_ARCH=apollolake --env DSM_VER=6.2 -v $(pwd)/artifacts:/result_spk -v $(pwd)/toolkit_tarballs:/toolkit_tarballs synobuild
 
 If everything worked you should have a directory called ``artifacts`` that
 contains your SPK files.
